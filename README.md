@@ -24,8 +24,8 @@ https://core.telegram.org/bots#6-botfather
 
 `$ git clone this repository`  
 `$ cd this repository`  
-`$ chmod +x ./multiple-choice.sh.sh`  
-`$ TELEGRAM_TOKEN=<your_bot_token> ./multiple-choice.sh.sh "my_command"`  
+`$ chmod +x ./multiple-choice.sh`  
+`$ TELEGRAM_TOKEN=<your_bot_token> ./multiple-choice.sh "my_command"`  
 
 >**use "/my_command" in bot conversation screen**
 
