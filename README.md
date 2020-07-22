@@ -30,7 +30,7 @@ https://core.telegram.org/bots#6-botfather
 >**Find your bot in telegram and use "/my_command" in the conversation screen**
 
 # Customize
-You can customize the options editing the array as below
+You can customize the options editing the code array as below
 
 `_OPTIONS=(jpg png svg pdf jpeg)`  
 `_OPTIONS=(on off)`  
