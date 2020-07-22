@@ -29,6 +29,13 @@ https://core.telegram.org/bots#6-botfather
 
 >**Find your bot in telegram and use "/my_command" in the conversation screen**
 
+# Customize
+You can customize the options editing the array as below
+
+`_OPTIONS=(jpg png svg pdf jpeg)`  
+`_OPTIONS=(on off)`  
+`_OPTIONS=(green yellow blue gray red white black brown)`  
+
 ## Thanks
 Best Telegram API for shell environments  
 https://github.com/shellscriptx/shellbot/wiki
