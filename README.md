@@ -34,7 +34,9 @@ You can customize the options editing the code array as below
 
 `_OPTIONS=(jpg png svg pdf jpeg)`  
 `_OPTIONS=(on off)`  
-`_OPTIONS=(green yellow blue gray red white black brown)`  
+`_OPTIONS=(green yellow blue gray red white black brown)` 
+
+>**the itens in the array mean the number of buttons bot will create, it is cool-buttons ;)**
 
 ## Thanks
 Best Telegram API for shell environments  
