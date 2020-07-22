@@ -27,7 +27,7 @@ https://core.telegram.org/bots#6-botfather
 `$ chmod +x ./multiple-choice.sh`  
 `$ TELEGRAM_TOKEN=<your_bot_token> ./multiple-choice.sh "my_command"`  
 
->**use "/my_command" in bot conversation screen**
+>**Find your bot in telegram and use "/my_command" in the conversation screen**
 
 ## Thanks
 Best Telegram API for shell environments  
