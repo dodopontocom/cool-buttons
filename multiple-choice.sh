@@ -80,9 +80,6 @@ tick.button() {
         count=1
 
         arr=($(echo ${callback_query_message_reply_markup_inline_keyboard_callback_data} | tr '|' ' '))
-        for ((i=0; i < ${#arr[@]}; i++)); do
-                echo "button callback data: ${arr[$i]}" | grep "^tick_"
-        done
 
         button2=''
 
@@ -111,9 +108,6 @@ untick.button() {
         count=1
 
         arr=($(echo ${callback_query_message_reply_markup_inline_keyboard_callback_data} | tr '|' ' '))
-        for ((i=0; i < ${#arr[@]}; i++)); do
-                echo "button callback data: ${arr[$i]}"
-        done
 
         button3=''
 
