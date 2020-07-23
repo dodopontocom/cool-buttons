@@ -5,10 +5,13 @@ BASEDIR="$(cd $(dirname ${BASH_SOURCE[0]}) >/dev/null 2>&1 && pwd)"
 API_VERSION_RAW_URL="https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh"
 API_GIT_URL="https://github.com/shellscriptx/shellbot.git"
 
-_UNTICKED="⚪"
-_TICKED="🔘"
+_FALSE="⛔"
+_TRUE="✅"
 
-_OPTIONS=(green red yellow none)
+#======================== Comment one or another to see the diferrence ================
+#_OPTIONS=(${_FALSE} ${_TRUE})
+_OPTIONS=(OFF ON)
+#======================================================================================
 
 _COMMAND="${1:-test}"
 
@@ -56,66 +59,59 @@ if [[ ! -f ${BASEDIR}/ShellBot.sh ]]; then
 fi
 
 init.button() {
-	local button1 keyboard title count
-	title="*Select one option:*"
-	count=1
+	local button1 keyboard title
+	title="*Switch:*"
 
 	button1=''
 
-	for i in $(echo ${_OPTIONS[@]}); do
-		ShellBot.InlineKeyboardButton --button 'button1' --text "${_UNTICKED} ${i}" --callback_data "tick_${i%%/*}" --line ${count}
-		count=$((count+1))
-	done
-
+	ShellBot.InlineKeyboardButton --button 'button1' \
+		--text "${_OPTIONS[0]}" \
+		--callback_data "tick_to_false" \
+		--line 1
+	
 	keyboard="$(ShellBot.InlineKeyboardMarkup -b 'button1')"
 
 	ShellBot.deleteMessage --chat_id ${message_chat_id[$id]} --message_id ${message_message_id[$id]}
 	ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 				--text "$(echo -e ${title})" \
-                	        --parse_mode markdown \
-                        	--reply_markup "$keyboard"
+				--parse_mode markdown \
+                --reply_markup "$keyboard"
 }
 
-tick.button() {
-	local button2 keyboard2 count
-	count=1
+tick_to_false.button() {
+	local button2 keyboard2
 
 	button2=''
 	
-	for i in $(echo ${_OPTIONS[@]}); do
-		if [[ "${callback_query_data[$id]}" == "tick_${i%%/*}" ]]; then
-			ShellBot.InlineKeyboardButton --button 'button2' --text "${_TICKED} ${i}" --callback_data "untick_${i%%/*}" --line ${count}
-		else
-			ShellBot.InlineKeyboardButton --button 'button2' --text "${_UNTICKED} ${i}" --callback_data "tick_${i%%/*}" --line ${count}
-		fi
-		count=$((count+1))
-	done
+	ShellBot.InlineKeyboardButton --button 'button2' \
+		--text "${_OPTIONS[1]}" \
+		--callback_data "tick_to_true" \
+		--line 1
 
 	keyboard2="$(ShellBot.InlineKeyboardMarkup -b 'button2')"
 
-	ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} --text "ticking ${callback_query_data[$id]}..."
+	ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} --text "making it true..."
 
-        ShellBot.editMessageReplyMarkup --chat_id ${callback_query_message_chat_id[$id]} \
+    ShellBot.editMessageReplyMarkup --chat_id ${callback_query_message_chat_id[$id]} \
 				--message_id ${callback_query_message_message_id[$id]} \
                             	--reply_markup "$keyboard2"
 }
 
-untick.button() {
-        local button3 keyboard3 count
-	count=1
+tick_to_true.button() {
+    local button3 keyboard3
 
-        button3=''
+    button3=''
 
-	for i in $(echo ${_OPTIONS[@]}); do
-		ShellBot.InlineKeyboardButton --button 'button3' --text "${_UNTICKED} ${i}" --callback_data "tick_${i%%/*}" --line ${count}
-		count=$((count+1))
-	done
+	ShellBot.InlineKeyboardButton --button 'button3' \
+		--text "${_OPTIONS[0]}" \
+		--callback_data "tick_to_false" \
+		--line 1
 
-        keyboard3="$(ShellBot.InlineKeyboardMarkup -b 'button3')"
+    keyboard3="$(ShellBot.InlineKeyboardMarkup -b 'button3')"
 
-        ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} --text "unticking..."
+    ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} --text "making it false..."
 
-        ShellBot.editMessageReplyMarkup --chat_id ${callback_query_message_chat_id[$id]} \
+    ShellBot.editMessageReplyMarkup --chat_id ${callback_query_message_chat_id[$id]} \
                                 --message_id ${callback_query_message_message_id[$id]} \
                                 --reply_markup "$keyboard3"
 }
@@ -140,16 +136,14 @@ do
 			esac
 		fi
 
-		for i in $(echo ${_OPTIONS[@]}); do
-			case ${callback_query_data[$id]} in
-				"tick_${i%%/*}")
-					tick.button
-					;;
-				"untick_${i%%/*}")
-					untick.button
-					;;
-			esac
-		done
+		case ${callback_query_data[$id]} in
+			"tick_to_true")
+				tick_to_true.button
+				;;
+			"tick_to_false")
+				tick_to_false.button
+				;;
+		esac
 
 	) &
 	done
