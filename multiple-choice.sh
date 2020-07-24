@@ -3,13 +3,10 @@
 BASEDIR="$(cd $(dirname ${BASH_SOURCE[0]}) >/dev/null 2>&1 && pwd)"
 
 API_GIT_URL="https://github.com/shellscriptx/shellbot.git"
-
 _UNTICKED="◻"
 _TICKED="☑"
-
-_OPTIONS=(jpg png svg pdf jpeg)
-
 _COMMAND="${1:-test}"
+_OPTIONS=(jpg png svg pdf jpeg)
 
 exitOnError() {
   code=${2:-$?}

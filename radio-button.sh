@@ -2,15 +2,11 @@
 
 BASEDIR="$(cd $(dirname ${BASH_SOURCE[0]}) >/dev/null 2>&1 && pwd)"
 
-API_VERSION_RAW_URL="https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh"
 API_GIT_URL="https://github.com/shellscriptx/shellbot.git"
-
 _UNTICKED="⚪"
 _TICKED="🔘"
-
-_OPTIONS=(green red yellow none)
-
 _COMMAND="${1:-test}"
+_OPTIONS=(green red yellow none)
 
 exitOnError() {
   code=${2:-$?}

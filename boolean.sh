@@ -2,18 +2,15 @@
 
 BASEDIR="$(cd $(dirname ${BASH_SOURCE[0]}) >/dev/null 2>&1 && pwd)"
 
-API_VERSION_RAW_URL="https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh"
 API_GIT_URL="https://github.com/shellscriptx/shellbot.git"
-
 _FALSE="⛔"
 _TRUE="✅"
+_COMMAND="${1:-test}"
 
 #======================== Comment one or another to see the diferrence ================
 #_OPTIONS=(${_FALSE} ${_TRUE})
 _OPTIONS=(OFF ON)
 #======================================================================================
-
-_COMMAND="${1:-test}"
 
 exitOnError() {
   code=${2:-$?}
